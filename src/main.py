@@ -20,7 +20,7 @@ from preprocess.text import Preprocessor
 from rules.filter import compile_regex_patterns, apply_rules
 from semantic.encoder import SemanticEncoder
 from classify.aggregator import aggregate_risk
-from services.perspective import get_sexually_explicit_score
+from services.filter_csv import get_toxicity_score
 from storage.firestore import (
     get_client as fs_client,
     save_records as fs_save,
@@ -159,7 +159,7 @@ def run_pipeline(args) -> List[CommentRecord]:
 
         perspective_score = None
         if bool(svc.get("perspective_enabled", False)):
-            perspective_score = get_sexually_explicit_score(text)
+            perspective_score = get_toxicity_score(text)
 
         final_score, label = aggregate_risk(
             rule_hits=hits,
