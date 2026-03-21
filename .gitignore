@@ -1,3 +1,7 @@
 .venv/
 .env
+<<<<<<< HEAD
 .secrets/
+=======
+secrets/
+>>>>>>> eb26c6c (removendo arquivos de debug)
